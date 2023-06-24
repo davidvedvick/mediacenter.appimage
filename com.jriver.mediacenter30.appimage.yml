@@ -1,7 +1,9 @@
 version: 1
 
 script:
-  - rm -r ./AppDir || true
+  - rm -rf ./AppDir || true
+  - mkdir -p AppDir/usr/share/icons
+  - cp Logo.png AppDir/usr/share/icons/mediacenter30.png
 
 AppDir:
   path: ./AppDir
@@ -9,7 +11,7 @@ AppDir:
   app_info:
     id: com.jriver.mediacenter30
     name: mediacenter30
-    # icon: "usr/lib/jriver/Media Center 30/Data/Default Art/Logo"
+    icon: mediacenter30
     version: latest
     exec: usr/bin/mediacenter30
     exec_args: $@
@@ -30,14 +32,22 @@ AppDir:
 
     include:
       - mediacenter30
-      - bash
-      - perl
-      - mutter
+    exclude:
+      - adwaita-icon-theme
+
+  files:
+    exclude:
+      - usr/lib/x86_64-linux-gnu/gconv
+      - usr/share/man
+      - usr/share/doc/*/README.*
+      - usr/share/doc/*/changelog.*
+      - usr/share/doc/*/NEWS.*
+      - usr/share/doc/*/TODO.*
+
   runtime:
     path_mappings:
       - /usr/lib/jriver/Media Center 30/:$APPDIR/usr/lib/jriver/Media Center 30/
-    # env:
-    #   APPDIR_LIBRARY_PATH: $APPDIR/lib/x86_64-linux-gnu:$APPDIR/usr/lib/x86_64-linux-gnu:$APPDIR/usr/lib/x86_64-linux-gnu/pulseaudio
+      - /usr/lib/jriver/MC30/:$APPDIR/usr/lib/jriver/MC30/
 
   # test:
   #   debian:

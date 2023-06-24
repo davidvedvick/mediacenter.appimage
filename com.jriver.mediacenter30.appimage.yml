@@ -1,0 +1,76 @@
+version: 1
+
+script:
+  - rm -r ./AppDir || true
+
+AppDir:
+  path: ./AppDir
+
+  app_info:
+    id: com.jriver.mediacenter30
+    name: mediacenter30
+    # icon: "usr/lib/jriver/Media Center 30/Data/Default Art/Logo"
+    version: latest
+    exec: usr/bin/mediacenter30
+    exec_args: $@
+
+  apt:
+    arch: amd64
+    sources:
+      - sourceline: 'deb [trusted=yes arch=amd64] http://dist.jriver.com/latest/mediacenter/ buster main'
+        key_url: 'http://dist.jriver.com/mediacenter@jriver.com.gpg.key'
+      - sourceline: 'deb [arch=amd64] http://deb.debian.org/debian buster main contrib non-free'
+        key_url: 'https://ftp-master.debian.org/keys/archive-key-10.asc'
+      - sourceline: 'deb [arch=amd64] http://deb.debian.org/debian buster-updates main contrib non-free'
+        key_url: 'https://ftp-master.debian.org/keys/archive-key-10.asc'
+      - sourceline: 'deb [arch=amd64] http://deb.debian.org/debian buster-backports main contrib non-free'
+        key_url: 'https://ftp-master.debian.org/keys/archive-key-11.asc'
+      - sourceline: 'deb [arch=amd64] http://security.debian.org/debian-security/ buster/updates main contrib non-free'
+        key_url: 'https://ftp-master.debian.org/keys/archive-key-10-security.asc'
+
+    include:
+      - mediacenter30
+      - bash
+      - perl
+      - mutter
+  runtime:
+    path_mappings:
+      - /usr/lib/jriver/Media Center 30/:$APPDIR/usr/lib/jriver/Media Center 30/
+    # env:
+    #   APPDIR_LIBRARY_PATH: $APPDIR/lib/x86_64-linux-gnu:$APPDIR/usr/lib/x86_64-linux-gnu:$APPDIR/usr/lib/x86_64-linux-gnu/pulseaudio
+
+  # test:
+  #   debian:
+  #     image: appimagecrafters/tests-env:debian-stable
+  #     command: "./AppRun"
+  #     use_host_x: True
+  #     env:
+  #       QT_DEBUG_PLUGINS: 1
+  #   centos:
+  #     image: appimagecrafters/tests-env:centos-7
+  #     command: "./AppRun"
+  #     use_host_x: True
+  #     env:
+  #       QT_DEBUG_PLUGINS: 1
+  #   arch:
+  #     image: appimagecrafters/tests-env:archlinux-latest
+  #     command: "./AppRun"
+  #     use_host_x: True
+  #     env:
+  #       QT_DEBUG_PLUGINS: 1
+  #   fedora:
+  #     image: appimagecrafters/tests-env:fedora-30
+  #     command: "./AppRun"
+  #     use_host_x: True
+  #     env:
+  #       QT_DEBUG_PLUGINS: 1
+  #   ubuntu:
+  #     image: appimagecrafters/tests-env:ubuntu-xenial
+  #     command: "./AppRun"
+  #     use_host_x: True
+
+
+AppImage:
+  update-information: None
+  sign-key: None
+  arch: x86_64

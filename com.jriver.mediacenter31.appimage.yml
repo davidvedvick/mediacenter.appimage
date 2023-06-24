@@ -3,36 +3,35 @@ version: 1
 script:
   - rm -rf ./AppDir || true
   - mkdir -p AppDir/usr/share/icons
-  - cp Logo.png AppDir/usr/share/icons/mediacenter30.png
-  - cp run-mc.sh AppDir
+  - cp Logo.png AppDir/usr/share/icons/mediacenter31.png
 
 AppDir:
   path: ./AppDir
 
   app_info:
-    id: media_center_30
-    name: mediacenter30
-    icon: mediacenter30
+    id: com.jriver.mediacenter31
+    name: mediacenter31
+    icon: mediacenter31
     version: latest
-    exec: run-mc.sh
+    exec: usr/bin/mediacenter31
     exec_args: $@
 
   apt:
     arch: amd64
     sources:
-      - sourceline: 'deb [trusted=yes arch=amd64] http://dist.jriver.com/latest/mediacenter/ buster main'
+      - sourceline: 'deb [trusted=yes arch=amd64] http://dist.jriver.com/latest/mediacenter/ bullseye main'
         key_url: 'http://dist.jriver.com/mediacenter@jriver.com.gpg.key'
-      - sourceline: 'deb [arch=amd64] http://deb.debian.org/debian buster main contrib non-free'
-        key_url: 'https://ftp-master.debian.org/keys/archive-key-10.asc'
-      - sourceline: 'deb [arch=amd64] http://deb.debian.org/debian buster-updates main contrib non-free'
-        key_url: 'https://ftp-master.debian.org/keys/archive-key-10.asc'
-      - sourceline: 'deb [arch=amd64] http://deb.debian.org/debian buster-backports main contrib non-free'
+      - sourceline: 'deb [arch=amd64] http://deb.debian.org/debian bullseye main contrib non-free'
         key_url: 'https://ftp-master.debian.org/keys/archive-key-11.asc'
-      - sourceline: 'deb [arch=amd64] http://security.debian.org/debian-security/ buster/updates main contrib non-free'
-        key_url: 'https://ftp-master.debian.org/keys/archive-key-10-security.asc'
+      - sourceline: 'deb [arch=amd64] http://deb.debian.org/debian bullseye-updates main contrib non-free'
+        key_url: 'https://ftp-master.debian.org/keys/archive-key-11.asc'
+      - sourceline: 'deb [arch=amd64] http://deb.debian.org/debian bullseye-backports main contrib non-free'
+        key_url: 'https://ftp-master.debian.org/keys/archive-key-12.asc'
+      - sourceline: 'deb [arch=amd64] http://security.debian.org/debian-security/ bullseye-security/updates main contrib non-free'
+        key_url: 'https://ftp-master.debian.org/keys/archive-key-11-security.asc'
 
     include:
-      - mediacenter30
+      - mediacenter31
     exclude:
       - adwaita-icon-theme
 
@@ -47,12 +46,8 @@ AppDir:
 
   runtime:
     path_mappings:
-      - /usr/lib/jriver/Media Center 30/:$APPDIR/usr/lib/jriver/Media Center 30/
-      - /usr/lib/jriver/MC30/:$APPDIR/usr/lib/jriver/MC30/
-      - /usr/lib/jriver/Media Center 30/Skins:$APPDIR/usr/lib/jriver/Media Center 30/Skins
-      - /usr/lib/jriver/Media Center 30/Data:$APPDIR/usr/lib/jriver/Media Center 30/Data
-    env:
-      MC_MAJOR_VERSION: Media Center 30
+      - /usr/lib/jriver/Media Center 31/:$APPDIR/usr/lib/jriver/Media Center 31/
+      - /usr/lib/jriver/MC31/:$APPDIR/usr/lib/jriver/MC31/
 
   # test:
   #   debian:

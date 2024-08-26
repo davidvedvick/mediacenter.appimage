@@ -1,3 +1,6 @@
-mkdir -p $HOME/.jriver/$MC_MAJOR_VERSION
-cp -a usr/lib/jriver/$MC_MAJOR_VERSION/Skins $HOME/.jriver/$MC_MAJOR_VERSION
-usr/bin/$MC_MAJOR_VERSION
+mkdir -p "$HOME/.jriver/Media Center $MC_MAJOR_VERSION"
+cp -a --update=none "$APPDIR/usr/lib/jriver/Media Center $MC_MAJOR_VERSION/Skins" "$HOME/.jriver/Media Center $MC_MAJOR_VERSION"
+cp -a --update=none "$APPDIR/usr/lib/jriver/Media Center $MC_MAJOR_VERSION/Data" "$HOME/.jriver/Media Center $MC_MAJOR_VERSION"
+cp -a --update=none "$APPDIR/usr/lib/jriver/Media Center $MC_MAJOR_VERSION/Plugins" "$HOME/.jriver/Media Center $MC_MAJOR_VERSION"
+cp -a --update=none "$APPDIR/usr/lib/jriver/Media Center $MC_MAJOR_VERSION/Visualizations" "$HOME/.jriver/Media Center $MC_MAJOR_VERSION"
+"$APPDIR/usr/bin/mediacenter$MC_MAJOR_VERSION"

@@ -1,0 +1,96 @@
+version: 1
+
+script:
+  - rm -rf ./AppDir || true
+  - mkdir -p AppDir/usr/share/icons
+  - cp Logo.png AppDir/usr/share/icons/mediacenter32.png
+  - cp run-mc.sh AppDir/run-mc.sh && chmod +x AppDir/run-mc.sh
+
+AppDir:
+  # after_runtime:
+  #   - cp -r --update-none $AppDir/usr/lib/jriver/Media Center 32/Skins $HOME/.jriver/Media Center 32
+
+  path: ./AppDir
+
+  app_info:
+    id: com.jriver.mediacenter32
+    name: mediacenter32
+    icon: mediacenter32
+    version: latest
+    exec: bin/bash
+    exec_args: run-mc.sh
+
+  apt:
+    arch: amd64
+    sources:
+      - sourceline: 'deb [trusted=yes arch=amd64] http://dist.jriver.com/latest/mediacenter/ bullseye main'
+        key_url: 'http://dist.jriver.com/mediacenter@jriver.com.gpg.key'
+      - sourceline: 'deb [arch=amd64] http://deb.debian.org/debian bullseye main contrib non-free'
+        key_url: 'https://ftp-master.debian.org/keys/archive-key-11.asc'
+      - sourceline: 'deb [arch=amd64] http://deb.debian.org/debian bullseye-updates main contrib non-free'
+        key_url: 'https://ftp-master.debian.org/keys/archive-key-11.asc'
+      - sourceline: 'deb [arch=amd64] http://deb.debian.org/debian bullseye-backports main contrib non-free'
+        key_url: 'https://ftp-master.debian.org/keys/archive-key-12.asc'
+      - sourceline: 'deb [arch=amd64] http://security.debian.org/debian-security/ bullseye-security/updates main contrib non-free'
+        key_url: 'https://ftp-master.debian.org/keys/archive-key-11-security.asc'
+
+    include:
+      - mediacenter32
+      - bash
+      - librsvg2-common
+      - coreutils
+    exclude:
+      - libpcre3
+      - adwaita-icon-theme
+
+  files:
+    exclude:
+      - usr/lib/x86_64-linux-gnu/gconv
+      - usr/share/man
+      - usr/share/doc/*/README.*
+      - usr/share/doc/*/changelog.*
+      - usr/share/doc/*/NEWS.*
+      - usr/share/doc/*/TODO.*
+
+  runtime:
+    env:
+      MC_MAJOR_VERSION: 32
+    path_mappings:
+      - /usr/lib/jriver/Media Center 32/:$APPDIR/usr/lib/jriver/Media Center 32/
+      - /usr/lib/jriver/MC32/:$APPDIR/usr/lib/jriver/MC32/
+
+  # test:
+  #   debian:
+  #     image: appimagecrafters/tests-env:debian-stable
+  #     command: "./AppRun"
+  #     use_host_x: True
+  #     env:
+  #       QT_DEBUG_PLUGINS: 1
+  #   centos:
+  #     image: appimagecrafters/tests-env:centos-7
+  #     command: "./AppRun"
+  #     use_host_x: True
+  #     env:
+  #       QT_DEBUG_PLUGINS: 1
+  #   arch:
+  #     image: appimagecrafters/tests-env:archlinux-latest
+  #     command: "./AppRun"
+  #     use_host_x: True
+  #     env:
+  #       QT_DEBUG_PLUGINS: 1
+  #   fedora:
+  #     image: appimagecrafters/tests-env:fedora-30
+  #     command: "./AppRun"
+  #     use_host_x: True
+  #     env:
+  #       QT_DEBUG_PLUGINS: 1
+  #   ubuntu:
+  #     image: appimagecrafters/tests-env:ubuntu-xenial
+  #     command: "./AppRun"
+  #     use_host_x: True
+
+
+AppImage:
+  update-information: None
+  sign-key: None
+  arch: x86_64

@@ -11,7 +11,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      uses: AppImageCrafters/build-appimage@master
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Build AppImage
+        uses: AppImageCrafters/build-appimage@master
         with:
           recipe: "./com.jriver.mediacenter32.appimage.yml"
         env:

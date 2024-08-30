@@ -3,12 +3,10 @@ version: 1
 script:
   - rm -rf ./AppDir || true
   - mkdir -p AppDir/usr/share/icons
-  - cp Logo.png AppDir/usr/share/icons/mediacenter32.png
-  - cp run-mc.sh AppDir/run-mc.sh && chmod +x AppDir/run-mc.sh
+  - cp --update=none Logo.png AppDir/usr/share/icons/mediacenter32.png
+  - cp --update=none run-mc.sh AppDir/run-mc.sh && chmod +x AppDir/run-mc.sh
 
 AppDir:
-  # after_runtime:
-  #   - cp -r --update-none $AppDir/usr/lib/jriver/Media Center 32/Skins $HOME/.jriver/Media Center 32
 
   path: ./AppDir
 
@@ -36,8 +34,8 @@ AppDir:
 
     include:
       - mediacenter32
-      - bash
       - librsvg2-common
+      - bash # For running the shim script
       - coreutils
     exclude:
       - libpcre3

@@ -1,0 +1,18 @@
+name: Build
+
+on:
+  branches:
+    - main
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      uses: AppImageCrafters/build-appimage@master
+        with:
+          recipe: "./com.jriver.mediacenter32.appimage.yml"
+        env:
+          UPDATE_INFO: gh-releases-zsync|AppImageCrafters|com.jriver.mediacenter32|latest|*x86_64.AppImage.zsync

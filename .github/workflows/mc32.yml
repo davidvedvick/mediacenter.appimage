@@ -21,3 +21,7 @@ jobs:
           recipe: "./com.jriver.mediacenter32.appimage.yml"
         env:
           UPDATE_INFO: gh-releases-zsync|AppImageCrafters|com.jriver.mediacenter32|latest|*x86_64.AppImage.zsync
+      - uses: actions/upload-artifact@v2
+        with:
+          name: AppImage
+          path: './*.AppImage*'

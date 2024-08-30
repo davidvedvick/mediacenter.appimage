@@ -1,6 +1,7 @@
 version: 1
 
 script:
+  - which mksquashfs || apt install squashfs-tools
   - rm -rf ./AppDir || true
   - mkdir -p AppDir/usr/share/icons
   - cp -n Logo.png AppDir/usr/share/icons/mediacenter32.png

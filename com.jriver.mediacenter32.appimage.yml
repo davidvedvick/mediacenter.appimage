@@ -3,8 +3,8 @@ version: 1
 script:
   - rm -rf ./AppDir || true
   - mkdir -p AppDir/usr/share/icons
-  - cp --update=none Logo.png AppDir/usr/share/icons/mediacenter32.png
-  - cp --update=none run-mc.sh AppDir/run-mc.sh && chmod +x AppDir/run-mc.sh
+  - cp -n Logo.png AppDir/usr/share/icons/mediacenter32.png
+  - cp -n run-mc.sh AppDir/run-mc.sh && chmod +x AppDir/run-mc.sh
 
 AppDir:
 
